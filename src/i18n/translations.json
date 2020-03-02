@@ -20,6 +20,10 @@
       "ru": "Russian",
       "en": "English",
       "language": "Language"
+    },
+    "search": {
+      "search": "Search",
+      "find": "Type name..."
     }
   },
   "ru": {
@@ -43,6 +47,10 @@
       "ru": "Русский",
       "en": "Английский",
       "language": "Язык"
+    },
+    "search": {
+      "search": "Поиск",
+      "find": "Введите имя..."
     }
   }
 }

@@ -15,6 +15,16 @@ $borderWidth: 1px;
 :before,
 :after {
   box-sizing: border-box;
+  font-family: "Open Sans";
+  font-size: 16px;
+
+  @media screen and (max-width: 420px) {
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
 }
 
 input {
@@ -34,10 +44,12 @@ label {
   text-align: center;
   cursor: pointer;
   font-weight: bold;
-  padding: 5px 20px;
+  padding: 0 20px;
   width: 100%;
   transition: all 0.7s;
   height: 30px;
+  line-height: 30px;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 form {
@@ -50,8 +62,8 @@ section {
 }
 
 input[type="radio"]:checked + label {
-  color: lighten($bg, 60%);
-  background: #c9e4fb;
+  color: #fefefe;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 label + input[type="radio"] + label {
@@ -97,6 +109,10 @@ label + input[type="radio"] + label {
   @media only screen and (max-width: 420px) {
     grid-template-columns: 1fr;
   }
+  h3 {
+    color: #666666;
+    font-family: "Spartan";
+  }
 }
 
 .langSwitcher,
@@ -115,6 +131,7 @@ label + input[type="radio"] + label {
 }
 
 .field {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   padding: 10px;
@@ -125,6 +142,10 @@ label + input[type="radio"] + label {
     &:nth-of-type(#{$i}) {
       animation: show 0.4s ease-in 0.1s * ($i % 20) forwards;
     }
+  }
+
+  @media screen and (max-width: 420px) {
+    gap: 0;
   }
 }
 
@@ -138,17 +159,46 @@ label + input[type="radio"] + label {
 
 .field .avatar {
   grid-column: 1 / 1;
+
+  @media screen and (max-width: 420px) {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
 }
 .field .name {
   grid-column: 2 / span 3;
+  margin: 0;
+
+  @media screen and (max-width: 420px) {
+    grid-column: span 4 / 8;
+  }
 }
 
 .field .age {
   grid-column: auto / span 1;
+
+  @media screen and (max-width: 420px) {
+    grid-column: span 2 / 9;
+    grid-row-start: 2;
+    justify-self: end;
+  }
 }
 
 .field .phone {
   grid-column: auto / span 2;
+
+  @media screen and (max-width: 420px) {
+    grid-column: span 3 / 7;
+    grid-row-start: 2;
+  }
+}
+
+.field .rating {
+  @media screen and (max-width: 420px) {
+    align-self: center;
+    grid-column-start: 8;
+  }
 }
 
 $star--filled: ★;
@@ -184,6 +234,8 @@ input[type="checkbox"] {
     display: block;
     position: relative;
     cursor: pointer;
+    background: none;
+    line-height: 40px;
 
     &:after {
       transition: all 0.4s ease-out;
@@ -232,20 +284,21 @@ input[type="checkbox"] {
 }
 
 .card__side {
-  height: calc(100% + 2px);
-  margin-top: -1px;
   margin-right: -1px;
   box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
 .human-preview {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 250px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  // border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
   opacity: 0;
+  background: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
   @for $i from 0 through 1000 {
     &:nth-of-type(#{$i}) {
       animation: show 0.4s ease-in 0.1s * ($i % 20) forwards;
@@ -260,7 +313,6 @@ input[type="checkbox"] {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
 .Previews {
@@ -286,6 +338,8 @@ input[type="checkbox"] {
   margin-top: 30px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
 }
 
 .lds-dual-ring {
@@ -325,6 +379,7 @@ input[type="checkbox"] {
   display: flex;
   flex-flow: row wrap;
   // justify-content: center;
+  padding: 0;
   height: 30px;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
@@ -340,20 +395,40 @@ input[type="checkbox"] {
 
 .search-form button {
   flex: 1 0 auto;
-  background: none;
+  background: rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   height: 30px;
-  margin-top: -1px;
-  margin-right: -2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: #fefefe;
   &:hover,
   &:focus {
-    background: #c9e4fb;
+    background: rgba(0, 0, 0, 0.1);
   }
 }
 .search-form input {
   flex: 4 0 auto;
-  padding: 5px 10px;
+  padding: 0 10px;
   outline: none;
+  color: #999;
+  outline: none;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  &:focus {
+    color: #666;
+  }
+}
+
+@keyframes suggestions-show {
+  from {
+    transform-origin: top center;
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 .suggestions {
@@ -368,11 +443,21 @@ input[type="checkbox"] {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease-in;
+  animation: suggestions-show 0.4s linear forwards;
+
+  &_hidden {
+    display: none;
+  }
 
   li {
     color: #666666;
     font-size: 16px;
     padding: 5px 10px;
+    cursor: pointer;
+  }
+  li:hover {
+    background: rgba(0, 0, 0, 0.1) lightskyblue;
   }
   li:not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -380,4 +465,121 @@ input[type="checkbox"] {
   .hl {
     background: #ffc600;
   }
+}
+
+.background {
+  background-color: lightskyblue;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23cc0000' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23aa0000' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23d6002b' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b10022' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d9004b' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23b2003d' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d3006c' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23ac0057' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23c4008c' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%239e0071' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: linear-gradient(#fff, #000);
+}
+
+.blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(200px);
+  background: lightcyan;
+}
+
+// FONTS
+
+/* cyrillic-ext */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2) format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+    U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2) format("woff2");
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2) format("woff2");
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2) format("woff2");
+  unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2) format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1,
+    U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url(./assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: "Spartan";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2)
+    format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Spartan";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
