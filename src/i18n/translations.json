@@ -1,0 +1,48 @@
+{
+  "en": {
+    "filter": {
+      "sort": "Sort by",
+      "id": "ID",
+      "name": "Name",
+      "age": "Age",
+      "asc": "Ascending",
+      "desc": "Descending",
+      "view": "Representation",
+      "table": "Table",
+      "preview": "Preview"
+    },
+    "human": {
+      "year": "years",
+      "years_1": "years",
+      "years_2": "years"
+    },
+    "lang": {
+      "ru": "Russian",
+      "en": "English",
+      "language": "Language"
+    }
+  },
+  "ru": {
+    "filter": {
+      "sort": "Сортировка",
+      "id": "ID",
+      "name": "Имя",
+      "age": "Возраст",
+      "asc": "По возрастанию",
+      "desc": "По убыванию",
+      "view": "Вид",
+      "table": "Таблица",
+      "preview": "Превью"
+    },
+    "human": {
+      "year": "год",
+      "years_1": "года",
+      "years_2": "лет"
+    },
+    "lang": {
+      "ru": "Русский",
+      "en": "Английский",
+      "language": "Язык"
+    }
+  }
+}
