@@ -59582,10 +59582,10 @@ module.exports = "/cat.1164576a.svg";
 module.exports = "/dog.99b57066.svg";
 },{}],"assets/images/fox.svg":[function(require,module,exports) {
 module.exports = "/fox.ca3763da.svg";
-},{}],"assets/images/lion.svg":[function(require,module,exports) {
-module.exports = "/lion.6dfc8359.svg";
 },{}],"assets/images/koala.svg":[function(require,module,exports) {
 module.exports = "/koala.eb1f66ce.svg";
+},{}],"assets/images/lion.svg":[function(require,module,exports) {
+module.exports = "/lion.6dfc8359.svg";
 },{}],"assets/images/owl.svg":[function(require,module,exports) {
 module.exports = "/owl.246dbc08.svg";
 },{}],"assets/images/penguin.svg":[function(require,module,exports) {
@@ -59594,25 +59594,25 @@ module.exports = "/penguin.8b100cd2.svg";
 module.exports = "/pig.e56199e0.svg";
 },{}],"assets/images/raccoon.svg":[function(require,module,exports) {
 module.exports = "/raccoon.4dd370d9.svg";
-},{}],"assets/images/react.svg":[function(require,module,exports) {
-module.exports = "/react.d6c2c023.svg";
 },{}],"assets/images/sheep.svg":[function(require,module,exports) {
 module.exports = "/sheep.39ad0708.svg";
+},{}],"assets/images/react.svg":[function(require,module,exports) {
+module.exports = "/react.d6c2c023.svg";
 },{}],"assets/images/*.svg":[function(require,module,exports) {
 module.exports = {
   "cat": require("./cat.svg"),
   "dog": require("./dog.svg"),
   "fox": require("./fox.svg"),
-  "lion": require("./lion.svg"),
   "koala": require("./koala.svg"),
+  "lion": require("./lion.svg"),
   "owl": require("./owl.svg"),
   "penguin": require("./penguin.svg"),
   "pig": require("./pig.svg"),
   "raccoon": require("./raccoon.svg"),
-  "react": require("./react.svg"),
-  "sheep": require("./sheep.svg")
+  "sheep": require("./sheep.svg"),
+  "react": require("./react.svg")
 };
-},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./lion.svg":"assets/images/lion.svg","./koala.svg":"assets/images/koala.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./pig.svg":"assets/images/pig.svg","./raccoon.svg":"assets/images/raccoon.svg","./react.svg":"assets/images/react.svg","./sheep.svg":"assets/images/sheep.svg"}],"assets/videos/boy.mp4":[function(require,module,exports) {
+},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./koala.svg":"assets/images/koala.svg","./lion.svg":"assets/images/lion.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./pig.svg":"assets/images/pig.svg","./raccoon.svg":"assets/images/raccoon.svg","./sheep.svg":"assets/images/sheep.svg","./react.svg":"assets/images/react.svg"}],"assets/videos/boy.mp4":[function(require,module,exports) {
 module.exports = "/boy.41fd31bf.mp4";
 },{}],"assets/videos/shoe.mp4":[function(require,module,exports) {
 module.exports = "/shoe.82a144ff.mp4";
@@ -60612,7 +60612,7 @@ function Views({
     }
   }, []);
   (0, _react.useEffect)(() => {
-    history.push(`/?view=${view}&&sortBy=${sortBy}&&order=${order}&&searchTerm=${searchTerm}`);
+    history.push(`${history.location.pathname}/?view=${view}&&sortBy=${sortBy}&&order=${order}&&searchTerm=${searchTerm}`);
   }, [view, sortBy, order, searchTerm]);
   if (isLoading) return _react.default.createElement(_Loader.default, null);
   return _react.default.createElement(_react.default.Fragment, null, view === _filterActions.PREVIEW_VIEW ? _react.default.createElement(_Previews.default, null) : _react.default.createElement(_Table.default, null));
@@ -63402,7 +63402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65358" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64583" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
