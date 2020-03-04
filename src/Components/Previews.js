@@ -2,6 +2,8 @@ import React, { useRef, useMemo } from "react";
 import Preview from "./Preview";
 import { connect } from "react-redux";
 
+import Fade from "react-reveal/Fade";
+
 import useScroll from "./useScroll";
 import useFilter from "./useFilter";
 
@@ -21,10 +23,14 @@ function Previews({ people = [], filter }) {
   }, [showedItems, filtered]);
 
   return (
-    <section ref={previewsRef} className="Previews">
-      {sliced.map(human => (
-        <Preview key={human.id} human={human} />
-      ))}
+    <section ref={previewsRef} className="previews__wrapper">
+      <Fade bottom cascade>
+        <section className="Previews">
+          {sliced.map(human => (
+            <Preview key={human.id} human={human} />
+          ))}
+        </section>
+      </Fade>
     </section>
   );
 }

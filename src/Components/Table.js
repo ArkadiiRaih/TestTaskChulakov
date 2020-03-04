@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Field from "./Field";
 import useScroll from "./useScroll";
 import useFilter from "./useFilter";
+import Fade from "react-reveal/Fade";
 
 function Table({ people = [], filter }) {
   const tableRef = useRef(null);
@@ -13,10 +14,14 @@ function Table({ people = [], filter }) {
   const sliced = filtered.slice(0, showedItems);
 
   return (
-    <section ref={tableRef} className="table">
-      {sliced.map(human => {
-        return <Field key={human.id} human={human} />;
-      })}
+    <section ref={tableRef} className="table__wrapper">
+      <Fade bottom cascade>
+        <section className="table">
+          {sliced.map(human => {
+            return <Field key={human.id} human={human} />;
+          })}
+        </section>
+      </Fade>
     </section>
   );
 }
