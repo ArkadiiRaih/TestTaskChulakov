@@ -55,7 +55,7 @@ function Search({ locale, changeFilter, people }) {
           className={`suggestions ${
             showSuggestions ? "" : "suggestions_hidden"
           }`}
-          onClick={handleClick}
+          onMouseDown={handleClick}
         >
           {findName(people, term)
             .slice(0, 10)

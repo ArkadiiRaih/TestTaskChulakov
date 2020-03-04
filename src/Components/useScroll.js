@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import throttle from "lodash/throttle";
 
-function useScroll(initial, maxItems, ref) {
+function useScroll(initial, maxItems, ref, step) {
   const [showedItems, setShowedItems] = useState(initial);
 
   const listenScroll = throttle(e => {
@@ -13,7 +13,7 @@ function useScroll(initial, maxItems, ref) {
         if (items >= maxItems) {
           return maxItems;
         }
-        return items + 10;
+        return items + step;
       });
     }
   }, 100);

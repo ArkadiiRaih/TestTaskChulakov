@@ -8,6 +8,7 @@ import LangSwitcher from "./LangSwitcher";
 import { fetchPeople } from "../actions/peopleActions";
 import { connect } from "react-redux";
 import Search from "./Search";
+import ViewsClass from "./ViewsClass";
 
 function App({ fetchPeople }) {
   useEffect(() => {
@@ -22,7 +23,7 @@ function App({ fetchPeople }) {
         <ViewSwitcher />
         <Search />
       </div>
-      <Views />
+      <ViewsClass />
     </div>
   );
 }

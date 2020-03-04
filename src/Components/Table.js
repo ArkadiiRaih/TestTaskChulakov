@@ -7,7 +7,7 @@ import useFilter from "./useFilter";
 
 function Table({ people = [], filter }) {
   const tableRef = useRef(null);
-  const showedItems = useScroll(10, people.length, tableRef);
+  const showedItems = useScroll(20, people.length, tableRef, 20);
   const filtered = useFilter({ people, filter });
 
   const sliced = filtered.slice(0, showedItems);

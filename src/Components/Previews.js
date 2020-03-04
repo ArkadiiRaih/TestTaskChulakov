@@ -12,7 +12,8 @@ function Previews({ people = [], filter }) {
   const showedItems = useScroll(
     filtered.length > 10 ? 10 : filtered.length,
     filtered.length,
-    previewsRef
+    previewsRef,
+    10
   );
 
   const sliced = useMemo(() => {

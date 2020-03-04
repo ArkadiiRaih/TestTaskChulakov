@@ -6,12 +6,14 @@ import {
 
 const peopleReducer = (people = { people: [], isLoading: false }, action) => {
   if (action.type === SET_FAVOURITE) {
-    const humanId = people.findIndex(human => human.id === action.payload.id);
-    const oldHuman = people[humanId];
+    const humanId = people.people.findIndex(
+      human => human.id === action.payload.id
+    );
+    const oldHuman = people.people[humanId];
     const newHuman = { ...oldHuman, favourite: !oldHuman.favourite };
-    const newPeople = [...people];
+    const newPeople = [...people.people];
     newPeople.splice(humanId, 1, newHuman);
-    return newPeople;
+    return { ...people, ["people"]: newPeople };
   }
   if (action.type === FETCH_PEOPLE) {
     return {
