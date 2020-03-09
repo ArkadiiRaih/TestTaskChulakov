@@ -62244,12 +62244,12 @@ module.exports = "/owl.246dbc08.svg";
 module.exports = "/penguin.8b100cd2.svg";
 },{}],"assets/images/raccoon.svg":[function(require,module,exports) {
 module.exports = "/raccoon.4dd370d9.svg";
-},{}],"assets/images/react.svg":[function(require,module,exports) {
-module.exports = "/react.d6c2c023.svg";
 },{}],"assets/images/pig.svg":[function(require,module,exports) {
 module.exports = "/pig.e56199e0.svg";
 },{}],"assets/images/sheep.svg":[function(require,module,exports) {
 module.exports = "/sheep.39ad0708.svg";
+},{}],"assets/images/react.svg":[function(require,module,exports) {
+module.exports = "/react.d6c2c023.svg";
 },{}],"assets/images/*.svg":[function(require,module,exports) {
 module.exports = {
   "cat": require("./cat.svg"),
@@ -62260,20 +62260,20 @@ module.exports = {
   "owl": require("./owl.svg"),
   "penguin": require("./penguin.svg"),
   "raccoon": require("./raccoon.svg"),
-  "react": require("./react.svg"),
   "pig": require("./pig.svg"),
-  "sheep": require("./sheep.svg")
+  "sheep": require("./sheep.svg"),
+  "react": require("./react.svg")
 };
-},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./koala.svg":"assets/images/koala.svg","./lion.svg":"assets/images/lion.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./raccoon.svg":"assets/images/raccoon.svg","./react.svg":"assets/images/react.svg","./pig.svg":"assets/images/pig.svg","./sheep.svg":"assets/images/sheep.svg"}],"assets/videos/boy.mp4":[function(require,module,exports) {
-module.exports = "/boy.41fd31bf.mp4";
-},{}],"assets/videos/shoe.mp4":[function(require,module,exports) {
+},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./koala.svg":"assets/images/koala.svg","./lion.svg":"assets/images/lion.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./raccoon.svg":"assets/images/raccoon.svg","./pig.svg":"assets/images/pig.svg","./sheep.svg":"assets/images/sheep.svg","./react.svg":"assets/images/react.svg"}],"assets/videos/shoe.mp4":[function(require,module,exports) {
 module.exports = "/shoe.82a144ff.mp4";
+},{}],"assets/videos/boy.mp4":[function(require,module,exports) {
+module.exports = "/boy.41fd31bf.mp4";
 },{}],"assets/videos/*.mp4":[function(require,module,exports) {
 module.exports = {
-  "boy": require("./boy.mp4"),
-  "shoe": require("./shoe.mp4")
+  "shoe": require("./shoe.mp4"),
+  "boy": require("./boy.mp4")
 };
-},{"./boy.mp4":"assets/videos/boy.mp4","./shoe.mp4":"assets/videos/shoe.mp4"}],"Components/Preview.js":[function(require,module,exports) {
+},{"./shoe.mp4":"assets/videos/shoe.mp4","./boy.mp4":"assets/videos/boy.mp4"}],"Components/PlayerControls.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -62281,7 +62281,175 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function PlayerControls({
+  scrub,
+  handleVolume,
+  toggleFullScreen,
+  volume,
+  togglePlay,
+  progress,
+  paused
+}, ref) {
+  const [mouseDown, setMouseDown] = (0, _react.useState)(false);
+  return _react.default.createElement("div", {
+    className: "player__controls"
+  }, _react.default.createElement("div", {
+    className: "progress",
+    ref: ref,
+    onMouseDown: () => {
+      setMouseDown(true);
+    },
+    onMouseUp: () => {
+      setMouseDown(false);
+    },
+    onMouseMove: e => mouseDown && scrub(e),
+    onClick: e => scrub(e)
+  }, _react.default.createElement("div", {
+    className: "progress__filled",
+    style: {
+      flexBasis: `${progress}%`
+    }
+  })), _react.default.createElement("button", {
+    className: "player__button toggle",
+    onClick: togglePlay
+  }, paused ? "►" : "❚❚"), _react.default.createElement("input", {
+    type: "range",
+    name: "volume",
+    className: "player__slider",
+    min: "0",
+    max: "1",
+    step: "0.05",
+    value: volume,
+    onChange: handleVolume,
+    onClick: handleVolume
+  }), _react.default.createElement("button", {
+    className: `player__button fullScreen`,
+    onClick: toggleFullScreen
+  }));
+}
+
+var _default = (0, _react.forwardRef)(PlayerControls);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"Components/Player.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _PlayerControls = _interopRequireDefault(require("./PlayerControls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Player({
+  video,
+  handleClick
+}) {
+  const [paused, setPaused] = (0, _react.useState)(true);
+  const [progress, setProgress] = (0, _react.useState)(0);
+  const [volume, setVolume] = (0, _react.useState)(0);
+  const ref = (0, _react.useRef)(null);
+  const progressRef = (0, _react.useRef)(null);
+
+  function scrub(e) {
+    const video = ref.current;
+    const {
+      offsetX
+    } = e.nativeEvent;
+    const scrubTime = offsetX / progressRef.current.offsetWidth * video.duration;
+    video.currentTime = scrubTime;
+  }
+
+  const togglePlay = () => {
+    const video = ref.current;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+
+    setPaused(paused => !paused);
+  };
+
+  function handleProgress() {
+    const video = ref.current;
+    const percent = video.currentTime / video.duration * 100;
+    setProgress(percent);
+  }
+
+  const handleVolume = e => {
+    // console.log(e.target.value);
+    video = ref.current;
+    video.volume = e.target.value;
+    setVolume(video.volume);
+  };
+
+  const toggleFullScreen = () => {
+    const video = ref.current;
+
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    } // setFull(full => !full);
+
+  };
+
+  return _react.default.createElement("div", {
+    className: "card__side player",
+    onClick: handleClick
+  }, _react.default.createElement("video", {
+    ref: ref,
+    src: video,
+    muted: true,
+    volume: "0",
+    onTimeUpdate: handleProgress,
+    onEnded: () => setPaused(true),
+    onClick: togglePlay,
+    onPlay: () => setPaused(false),
+    onPause: () => setPaused(true)
+  }), _react.default.createElement(_PlayerControls.default, {
+    ref: progressRef,
+    video: ref.current,
+    progress: progress,
+    paused: paused,
+    toggleFullScreen: toggleFullScreen,
+    togglePlay: togglePlay,
+    paused: paused,
+    scrub: scrub
+  }));
+}
+
+var _default = Player;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./PlayerControls":"Components/PlayerControls.js"}],"Components/Preview.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _Star = _interopRequireDefault(require("./Star"));
 
@@ -62293,11 +62461,18 @@ var _2 = _interopRequireDefault(require("../assets/videos/*.mp4"));
 
 var _reactReduxI18n = require("react-redux-i18n");
 
+var _Player = _interopRequireDefault(require("./Player"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Preview({
   human = {},
-  style
+  style,
+  handleClick
 }) {
   const {
     id,
@@ -62330,17 +62505,18 @@ function Preview({
     className: "age"
   }, age, " ", _react.default.createElement(_reactReduxI18n.Translate, {
     value: (0, _utilities.translateAge)(age)
-  })), _react.default.createElement("p", null, phone), _react.default.createElement("p", null, phrase))), video ? _react.default.createElement("div", {
-    className: "card__side"
-  }, _react.default.createElement("video", {
-    src: _2.default[video],
-    controls: true
-  })) : null);
+  })), _react.default.createElement("p", null, phone), _react.default.createElement("p", null, phrase))), video ? _react.default.createElement(_Player.default, {
+    video: _2.default[video],
+    handleClick: handleClick
+  }) : // <div className="card__side player">
+  //   <video src={videos[video]} muted controls></video>
+  // </div>
+  null);
 }
 
 var _default = Preview;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Star":"Components/Star.js","../utilities":"utilities.js","../assets/images/*.svg":"assets/images/*.svg","../assets/videos/*.mp4":"assets/videos/*.mp4","react-redux-i18n":"../node_modules/react-redux-i18n/build/index.js"}],"../node_modules/react-reveal/globals.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Star":"Components/Star.js","../utilities":"utilities.js","../assets/images/*.svg":"assets/images/*.svg","../assets/videos/*.mp4":"assets/videos/*.mp4","react-redux-i18n":"../node_modules/react-redux-i18n/build/index.js","./Player":"Components/Player.js"}],"../node_modules/react-reveal/globals.js":[function(require,module,exports) {
 "use strict";function insertRule(e){try{return sheet.insertRule(e,sheet.cssRules.length)}catch(e){console.warn("react-reveal - animation failed")}}function cascade(e,n,t,o,r){var s=Math.log(o),i=Math.log(r),a=(i-s)/(t-n);return Math.exp(s+a*(e-n))}function animation(e){if(!sheet)return"";var n="@keyframes "+(name+counter)+"{"+e+"}",t=effectMap[e];return t?""+name+t:(sheet.insertRule(n,sheet.cssRules.length),effectMap[e]=counter,""+name+counter++)}function hideAll(){globalHide||(exports.globalHide=globalHide=!0,window.removeEventListener("scroll",hideAll,!0),insertRule("."+namespace+" { opacity: 0; }"),window.removeEventListener("orientationchange",hideAll,!0),window.document.removeEventListener("visibilitychange",hideAll))}function config(e){var n=e.ssrFadeout;exports.fadeOutEnabled=fadeOutEnabled=n}Object.defineProperty(exports,"__esModule",{value:!0}),exports.insertRule=insertRule,exports.cascade=cascade,exports.animation=animation,exports.hideAll=hideAll,exports.default=config;var namespace=exports.namespace="react-reveal",defaults=exports.defaults={duration:1e3,delay:0,count:1},ssr=exports.ssr=!0,observerMode=exports.observerMode=!1,raf=exports.raf=function(e){return window.setTimeout(e,66)},disableSsr=exports.disableSsr=function(){return exports.ssr=ssr=!1},fadeOutEnabled=exports.fadeOutEnabled=!1,ssrFadeout=exports.ssrFadeout=function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];return exports.fadeOutEnabled=fadeOutEnabled=e},globalHide=exports.globalHide=!1,ie10=exports.ie10=!1,collapseend=exports.collapseend=void 0,counter=1,effectMap={},sheet=!1,name=namespace+"-"+Math.floor(1e15*Math.random())+"-";if("undefined"!=typeof window&&"nodejs"!==window.name&&window.document&&"undefined"!=typeof navigator){exports.observerMode=observerMode="IntersectionObserver"in window&&"IntersectionObserverEntry"in window&&"intersectionRatio"in window.IntersectionObserverEntry.prototype&&/\{\s*\[native code\]\s*\}/.test(""+IntersectionObserver),exports.raf=raf=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||raf,exports.ssr=ssr=window.document.querySelectorAll("div[data-reactroot]").length>0,-1!==navigator.appVersion.indexOf("MSIE 10")&&(exports.ie10=ie10=!0),ssr&&"performance"in window&&"timing"in window.performance&&"domContentLoadedEventEnd"in window.performance.timing&&window.performance.timing.domLoading&&Date.now()-window.performance.timing.domLoading<300&&(exports.ssr=ssr=!1),ssr&&window.setTimeout(disableSsr,1500),observerMode||(exports.collapseend=collapseend=document.createEvent("Event"),collapseend.initEvent("collapseend",!0,!0));var element=document.createElement("style");document.head.appendChild(element),element.sheet&&element.sheet.cssRules&&element.sheet.insertRule&&(sheet=element.sheet,window.addEventListener("scroll",hideAll,!0),window.addEventListener("orientationchange",hideAll,!0),window.document.addEventListener("visibilitychange",hideAll))}
 },{}],"../node_modules/react-reveal/RevealBase.js":[function(require,module,exports) {
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _defineProperty(e,t,i){return t in e?Object.defineProperty(e,t,{value:i,enumerable:!0,configurable:!0,writable:!0}):e[t]=i,e}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},_slicedToArray=function(){function e(e,t){var i=[],s=!0,o=!1,n=void 0;try{for(var r,a=e[Symbol.iterator]();!(s=(r=a.next()).done)&&(i.push(r.value),!t||i.length!==t);s=!0);}catch(e){o=!0,n=e}finally{try{!s&&a.return&&a.return()}finally{if(o)throw n}}return i}return function(t,i){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,i);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var s in i)Object.prototype.hasOwnProperty.call(i,s)&&(e[s]=i[s])}return e},_createClass=function(){function e(e,t){for(var i=0;i<t.length;i++){var s=t[i];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}return function(t,i,s){return i&&e(t.prototype,i),s&&e(t,s),t}}(),_react=require("react"),_react2=_interopRequireDefault(_react),_propTypes=require("prop-types"),_globals=require("./globals"),inOut=(0,_propTypes.shape)({make:_propTypes.func,duration:_propTypes.number.isRequired,delay:_propTypes.number.isRequired,forever:_propTypes.bool,count:_propTypes.number.isRequired,style:_propTypes.object.isRequired,reverse:_propTypes.bool}),propTypes={collapse:_propTypes.bool,collapseEl:_propTypes.element,cascade:_propTypes.bool,wait:_propTypes.number,force:_propTypes.bool,disabled:_propTypes.bool,appear:_propTypes.bool,enter:_propTypes.bool,exit:_propTypes.bool,fraction:_propTypes.number,refProp:_propTypes.string,innerRef:_propTypes.func,onReveal:_propTypes.func,unmountOnExit:_propTypes.bool,mountOnEnter:_propTypes.bool,inEffect:inOut.isRequired,outEffect:(0,_propTypes.oneOfType)([inOut,(0,_propTypes.oneOf)([!1])]).isRequired,ssrReveal:_propTypes.bool,collapseOnly:_propTypes.bool,ssrFadeout:_propTypes.bool},defaultProps={fraction:.2,refProp:"ref"},contextTypes={transitionGroup:_propTypes.object},RevealBase=function(e){function t(e,i){_classCallCheck(this,t);var s=_possibleConstructorReturn(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e,i));return s.isOn=void 0===e.when||!!e.when,s.state={collapse:e.collapse?t.getInitialCollapseStyle(e):void 0,style:{opacity:s.isOn&&!e.ssrReveal||!e.outEffect?void 0:0}},s.savedChild=!1,s.isShown=!1,_globals.observerMode?s.handleObserve=s.handleObserve.bind(s):(s.revealHandler=s.makeHandler(s.reveal),s.resizeHandler=s.makeHandler(s.resize)),s.saveRef=s.saveRef.bind(s),s}return _inherits(t,e),_createClass(t,[{key:"saveRef",value:function(e){this.childRef&&this.childRef(e),this.props.innerRef&&this.props.innerRef(e),this.el!==e&&(this.el=e&&"offsetHeight"in e?e:void 0,this.observe(this.props,!0))}},{key:"invisible",value:function(){this&&this.el&&(this.savedChild=!1,this.isShown||(this.setState({hasExited:!0,collapse:this.props.collapse?_extends({},this.state.collapse,{visibility:"hidden"}):null,style:{opacity:0}}),!_globals.observerMode&&this.props.collapse&&window.document.dispatchEvent(_globals.collapseend)))}},{key:"animationEnd",value:function(e,t,i){var s=this,o=i.forever,n=i.count,r=i.delay,a=i.duration;if(!o){var l=function(){s&&s.el&&(s.animationEndTimeout=void 0,e.call(s))};this.animationEndTimeout=window.setTimeout(l,r+(a+(t?a:0)*n))}}},{key:"getDimensionValue",value:function(){return this.el.offsetHeight+parseInt(window.getComputedStyle(this.el,null).getPropertyValue("margin-top"),10)+parseInt(window.getComputedStyle(this.el,null).getPropertyValue("margin-bottom"),10)}},{key:"collapse",value:function(e,t,i){var s=i.duration+(t.cascade?i.duration:0),o=this.isOn?this.getDimensionValue():0,n=void 0,r=void 0;if(t.collapseOnly)n=i.duration/3,r=i.delay;else{var a=s>>2,l=a>>1;n=a,r=i.delay+(this.isOn?0:s-a-l),e.style.animationDuration=s-a+(this.isOn?l:-l)+"ms",e.style.animationDelay=i.delay+(this.isOn?a-l:0)+"ms"}return e.collapse={height:o,transition:"height "+n+"ms ease "+r+"ms",overflow:t.collapseOnly?"hidden":void 0},e}},{key:"animate",value:function(e){if(this&&this.el&&(this.unlisten(),this.isShown!==this.isOn)){this.isShown=this.isOn;var t=!this.isOn&&e.outEffect,i=e[t?"outEffect":"inEffect"],s="style"in i&&i.style.animationName||void 0,o=void 0;e.collapseOnly?o={hasAppeared:!0,hasExited:!1,style:{opacity:1}}:((e.outEffect||this.isOn)&&i.make&&(s=i.make),o={hasAppeared:!0,hasExited:!1,collapse:void 0,style:_extends({},i.style,{animationDuration:i.duration+"ms",animationDelay:i.delay+"ms",animationIterationCount:i.forever?"infinite":i.count,opacity:1,animationName:s}),className:i.className}),this.setState(e.collapse?this.collapse(o,e,i):o),t?(this.savedChild=_react2.default.cloneElement(this.getChild()),this.animationEnd(this.invisible,e.cascade,i)):this.savedChild=!1,this.onReveal(e)}}},{key:"onReveal",value:function(e){e.onReveal&&this.isOn&&(this.onRevealTimeout&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)),e.wait?this.onRevealTimeout=window.setTimeout(e.onReveal,e.wait):e.onReveal())}},{key:"componentWillUnmount",value:function(){this.unlisten(),_globals.ssr&&(0,_globals.disableSsr)()}},{key:"handleObserve",value:function(e,t){_slicedToArray(e,1)[0].intersectionRatio>0&&(t.disconnect(),this.observer=null,this.reveal(this.props,!0))}},{key:"observe",value:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];if(this.el&&_globals.observerMode){if(this.observer){if(!t)return;this.observer.disconnect()}else if(t)return;this.observer=new IntersectionObserver(this.handleObserve,{threshold:e.fraction}),this.observer.observe(this.el)}}},{key:"reveal",value:function(e){var t=this,i=arguments.length>1&&void 0!==arguments[1]&&arguments[1];_globals.globalHide||(0,_globals.hideAll)(),this&&this.el&&(e||(e=this.props),_globals.ssr&&(0,_globals.disableSsr)(),this.isOn&&this.isShown&&void 0!==e.spy?(this.isShown=!1,this.setState({style:{}}),window.setTimeout(function(){return t.reveal(e)},200)):i||this.inViewport(e)||e.force?this.animate(e):_globals.observerMode?this.observe(e):this.listen())}},{key:"componentDidMount",value:function(){var e=this;if(this.el&&!this.props.disabled){this.props.collapseOnly||("make"in this.props.inEffect&&this.props.inEffect.make(!1,this.props),void 0!==this.props.when&&this.props.outEffect&&"make"in this.props.outEffect&&this.props.outEffect.make(!0,this.props));var i=this.context.transitionGroup,s=i&&!i.isMounting?!("enter"in this.props&&!1===this.props.enter):this.props.appear;return this.isOn&&((void 0!==this.props.when||void 0!==this.props.spy)&&!s||_globals.ssr&&!_globals.fadeOutEnabled&&!this.props.ssrFadeout&&this.props.outEffect&&!this.props.ssrReveal&&t.getTop(this.el)<window.pageYOffset+window.innerHeight)?(this.isShown=!0,this.setState({hasAppeared:!0,collapse:this.props.collapse?{height:this.getDimensionValue()}:this.state.collapse,style:{opacity:1}}),void this.onReveal(this.props)):_globals.ssr&&(_globals.fadeOutEnabled||this.props.ssrFadeout)&&this.props.outEffect&&t.getTop(this.el)<window.pageYOffset+window.innerHeight?(this.setState({style:{opacity:0,transition:"opacity 1000ms 1000ms"}}),void window.setTimeout(function(){return e.reveal(e.props,!0)},2e3)):void(this.isOn&&(this.props.force?this.animate(this.props):this.reveal(this.props)))}}},{key:"cascade",value:function(e){var t=this,i=void 0;i="string"==typeof e?e.split("").map(function(e,t){return _react2.default.createElement("span",{key:t,style:{display:"inline-block",whiteSpace:"pre"}},e)}):_react2.default.Children.toArray(e);var s=this.props[this.isOn||!this.props.outEffect?"inEffect":"outEffect"],o=s.duration,n=s.reverse,r=i.length,a=2*o;this.props.collapse&&(a=parseInt(this.state.style.animationDuration,10),o=a/2);var l=n?r:0;return i=i.map(function(e){return"object"===(void 0===e?"undefined":_typeof(e))&&e?_react2.default.cloneElement(e,{style:_extends({},e.props.style,t.state.style,{animationDuration:Math.round((0,_globals.cascade)(n?l--:l++,0,r,o,a))+"ms"})}):e})}},{key:"componentWillReceiveProps",value:function(e){if(void 0!==e.when&&(this.isOn=!!e.when),e.fraction!==this.props.fraction&&this.observe(e,!0),!this.isOn&&e.onExited&&"exit"in e&&!1===e.exit)return void e.onExited();e.disabled||(e.collapse&&!this.props.collapse&&(this.setState({style:{},collapse:t.getInitialCollapseStyle(e)}),this.isShown=!1),e.when===this.props.when&&e.spy===this.props.spy||this.reveal(e),this.onRevealTimeout&&!this.isOn&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)))}},{key:"getChild",value:function(){if(this.savedChild&&!this.props.disabled)return this.savedChild;if("object"===_typeof(this.props.children)){var e=_react2.default.Children.only(this.props.children);return"type"in e&&"string"==typeof e.type||"ref"!==this.props.refProp?e:_react2.default.createElement("div",null,e)}return _react2.default.createElement("div",null,this.props.children)}},{key:"render",value:function(){var e=void 0;e=this.state.hasAppeared?!this.props.unmountOnExit||!this.state.hasExited||this.isOn:!this.props.mountOnEnter||this.isOn;var t=this.getChild();"function"==typeof t.ref&&(this.childRef=t.ref);var i=!1,s=t.props,o=s.style,n=s.className,r=s.children,a=this.props.disabled?n:(this.props.outEffect?_globals.namespace:"")+(this.state.className?" "+this.state.className:"")+(n?" "+n:"")||void 0,l=void 0;"function"==typeof this.state.style.animationName&&(this.state.style.animationName=this.state.style.animationName(!this.isOn,this.props)),this.props.cascade&&!this.props.disabled&&r&&this.state.style.animationName?(i=this.cascade(r),l=_extends({},o,{opacity:1})):l=this.props.disabled?o:_extends({},o,this.state.style);var p=_extends({},this.props.props,_defineProperty({className:a,style:l},this.props.refProp,this.saveRef)),h=_react2.default.cloneElement(t,p,e?i||r:void 0);return void 0!==this.props.collapse?this.props.collapseEl?_react2.default.cloneElement(this.props.collapseEl,{style:_extends({},this.props.collapseEl.style,this.props.disabled?void 0:this.state.collapse),children:h}):_react2.default.createElement("div",{style:this.props.disabled?void 0:this.state.collapse,children:h}):h}},{key:"makeHandler",value:function(e){var t=this,i=function(){e.call(t,t.props),t.ticking=!1};return function(){t.ticking||((0,_globals.raf)(i),t.ticking=!0)}}},{key:"inViewport",value:function(e){if(!this.el||window.document.hidden)return!1;var i=this.el.offsetHeight,s=window.pageYOffset-t.getTop(this.el),o=Math.min(i,window.innerHeight)*(_globals.globalHide?e.fraction:0);return s>o-window.innerHeight&&s<i-o}},{key:"resize",value:function(e){this&&this.el&&this.isOn&&this.inViewport(e)&&(this.unlisten(),this.isShown=this.isOn,this.setState({hasExited:!this.isOn,hasAppeared:!0,collapse:void 0,style:{opacity:this.isOn||!e.outEffect?1:0}}),this.onReveal(e))}},{key:"listen",value:function(){_globals.observerMode||this.isListener||(this.isListener=!0,window.addEventListener("scroll",this.revealHandler,{passive:!0}),window.addEventListener("orientationchange",this.revealHandler,{passive:!0}),window.document.addEventListener("visibilitychange",this.revealHandler,{passive:!0}),window.document.addEventListener("collapseend",this.revealHandler,{passive:!0}),window.addEventListener("resize",this.resizeHandler,{passive:!0}))}},{key:"unlisten",value:function(){!_globals.observerMode&&this.isListener&&(window.removeEventListener("scroll",this.revealHandler,{passive:!0}),window.removeEventListener("orientationchange",this.revealHandler,{passive:!0}),window.document.removeEventListener("visibilitychange",this.revealHandler,{passive:!0}),window.document.removeEventListener("collapseend",this.revealHandler,{passive:!0}),window.removeEventListener("resize",this.resizeHandler,{passive:!0}),this.isListener=!1),this.onRevealTimeout&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)),this.animationEndTimeout&&(this.animationEndTimeout=window.clearTimeout(this.animationEndTimeout))}}],[{key:"getInitialCollapseStyle",value:function(e){return{height:0,visibility:e.when?void 0:"hidden"}}},{key:"getTop",value:function(e){for(;void 0===e.offsetTop;)e=e.parentNode;for(var t=e.offsetTop;e.offsetParent;t+=e.offsetTop)e=e.offsetParent;return t}}]),t}(_react2.default.Component);RevealBase.propTypes=propTypes,RevealBase.defaultProps=defaultProps,RevealBase.contextTypes=contextTypes,RevealBase.displayName="RevealBase",exports.default=RevealBase,module.exports=exports.default;
@@ -62830,6 +63006,8 @@ var _useScroll = _interopRequireDefault(require("./useScroll"));
 
 var _useFilter = _interopRequireDefault(require("./useFilter"));
 
+var _throttle = _interopRequireDefault(require("lodash/throttle"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -62845,10 +63023,46 @@ function Previews({
     people,
     filter
   });
+  const [videoStoped, setVideoStoped] = (0, _react.useState)(false);
   const showedItems = (0, _useScroll.default)(filtered.length > 10 ? 10 : filtered.length, filtered.length, previewsRef, 10);
   const sliced = (0, _react.useMemo)(() => {
     return filtered.slice(0, showedItems);
   }, [showedItems, filtered]);
+  const handleVideoScroll = (0, _throttle.default)(e => {
+    const videos = previewsRef.current.querySelectorAll("video");
+    videos.forEach(video => handlePlayVideo(video));
+  }, 100);
+
+  function handlePlayVideo(video) {
+    const top = video.getBoundingClientRect().top;
+
+    if (window.innerHeight / 2 >= top - 50 && window.innerHeight / 2 <= top + video.offsetHeight + 50) {
+      if (!video.paused) return;
+      togglePlay(video);
+    } else {
+      if (video.paused) return;
+      togglePlay(video);
+    }
+  }
+
+  (0, _react.useEffect)(() => {
+    if (!videoStoped) {
+      window.addEventListener("scroll", handleVideoScroll);
+    }
+
+    () => window.removeEventListener("scroll", handleVideoScroll);
+  });
+
+  function togglePlay(video) {
+    const method = video.paused ? "play" : "pause";
+    video[method]();
+  }
+
+  const handleClick = e => {
+    setVideoStoped(true);
+    window.removeEventListener("scroll", handleVideoScroll);
+  };
+
   return _react.default.createElement("section", {
     ref: previewsRef,
     className: "previews__wrapper"
@@ -62859,7 +63073,8 @@ function Previews({
     className: "Previews"
   }, sliced.map(human => _react.default.createElement(_Preview.default, {
     key: human.id,
-    human: human
+    human: human,
+    handleClick: handleClick
   })))));
 }
 
@@ -62875,7 +63090,7 @@ const mapStateToProps = ({
 var _default = (0, _reactRedux.connect)(mapStateToProps)(Previews);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Preview":"Components/Preview.js","react-redux":"../node_modules/react-redux/es/index.js","react-reveal/Fade":"../node_modules/react-reveal/Fade.js","./useScroll":"Components/useScroll.js","./useFilter":"Components/useFilter.js"}],"Components/Field.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Preview":"Components/Preview.js","react-redux":"../node_modules/react-redux/es/index.js","react-reveal/Fade":"../node_modules/react-reveal/Fade.js","./useScroll":"Components/useScroll.js","./useFilter":"Components/useFilter.js","lodash/throttle":"../node_modules/lodash/throttle.js"}],"Components/Field.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -63259,7 +63474,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./assets\\back3.svg":[["back3.f832b407.svg","assets/back3.svg"],"assets/back3.svg"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWJ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWJ0bbck.ff70b54e.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFUZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFUZ0bbck.dceceadb.woff2","assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWZ0bbck.0404a59b.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVp0bbck.woff2":[["mem8YaGs126MiZpBA-UFVp0bbck.843634e6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWp0bbck.woff2":[["mem8YaGs126MiZpBA-UFWp0bbck.dde40bda.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFW50bbck.woff2":[["mem8YaGs126MiZpBA-UFW50bbck.5e3b91a6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVZ0b.woff2":[["mem8YaGs126MiZpBA-UFVZ0b.d5072cd0.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.fe2f562e.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.e8f4b576.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./assets\\back3.svg":[["back3.f832b407.svg","assets/back3.svg"],"assets/back3.svg"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWJ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWJ0bbck.ff70b54e.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFUZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFUZ0bbck.dceceadb.woff2","assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWZ0bbck.0404a59b.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVp0bbck.woff2":[["mem8YaGs126MiZpBA-UFVp0bbck.843634e6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWp0bbck.woff2":[["mem8YaGs126MiZpBA-UFWp0bbck.dde40bda.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFW50bbck.woff2":[["mem8YaGs126MiZpBA-UFW50bbck.5e3b91a6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVZ0b.woff2":[["mem8YaGs126MiZpBA-UFVZ0b.d5072cd0.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.fe2f562e.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.e8f4b576.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"./assets\\fullScreen.svg":[["fullScreen.2403092b.svg","assets/fullScreen.svg"],"assets/fullScreen.svg"],"./assets\\previewScreen.svg":[["previewScreen.5849b4d0.svg","assets/previewScreen.svg"],"assets/previewScreen.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -63323,7 +63538,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62997" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
