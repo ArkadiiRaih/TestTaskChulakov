@@ -20,7 +20,7 @@ class Views extends React.PureComponent {
   }
 
   createUrlString(view, sortBy, order, searchTerm) {
-    return `/?view=${view}&&sortBy=${sortBy}&&order=${order}&&searchTerm=${searchTerm}`;
+    return `${this.props.location.pathname}?view=${view}&&sortBy=${sortBy}&&order=${order}&&searchTerm=${searchTerm}`;
   }
 
   componentDidMount() {

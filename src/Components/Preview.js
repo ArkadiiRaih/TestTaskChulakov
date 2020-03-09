@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Star from "./Star";
 
 import { translateAge } from "../utilities";
@@ -7,8 +7,11 @@ import images from "../assets/images/*.svg";
 import videos from "../assets/videos/*.mp4";
 import { Translate } from "react-redux-i18n";
 
-function Preview({ human = {}, style }) {
+import Player from "./Player";
+
+function Preview({ human = {}, style, handleClick }) {
   const { id, name, image, age, favourite, phrase, video, phone } = human;
+
   return (
     <article className={`human-preview col_${video ? "2" : "1"}`} style={style}>
       <div className={`card col_${video ? "1" : "2"}`}>
@@ -26,10 +29,11 @@ function Preview({ human = {}, style }) {
         </div>
       </div>
       {video ? (
-        <div className="card__side">
-          <video src={videos[video]} controls></video>
-        </div>
-      ) : null}
+        <Player video={videos[video]} handleClick={handleClick} />
+      ) : // <div className="card__side player">
+      //   <video src={videos[video]} muted controls></video>
+      // </div>
+      null}
     </article>
   );
 }

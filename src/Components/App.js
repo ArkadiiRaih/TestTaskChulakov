@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import SortSwitcher from "./SortSwitcher";
 import ViewSwitcher from "./ViewSwitcher";
-import Views from "./Views";
 import LangSwitcher from "./LangSwitcher";
 
 import { fetchPeople } from "../actions/peopleActions";
