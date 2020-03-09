@@ -62242,14 +62242,14 @@ module.exports = "/lion.6dfc8359.svg";
 module.exports = "/owl.246dbc08.svg";
 },{}],"assets/images/penguin.svg":[function(require,module,exports) {
 module.exports = "/penguin.8b100cd2.svg";
-},{}],"assets/images/raccoon.svg":[function(require,module,exports) {
-module.exports = "/raccoon.4dd370d9.svg";
 },{}],"assets/images/pig.svg":[function(require,module,exports) {
 module.exports = "/pig.e56199e0.svg";
-},{}],"assets/images/sheep.svg":[function(require,module,exports) {
-module.exports = "/sheep.39ad0708.svg";
+},{}],"assets/images/raccoon.svg":[function(require,module,exports) {
+module.exports = "/raccoon.4dd370d9.svg";
 },{}],"assets/images/react.svg":[function(require,module,exports) {
 module.exports = "/react.d6c2c023.svg";
+},{}],"assets/images/sheep.svg":[function(require,module,exports) {
+module.exports = "/sheep.39ad0708.svg";
 },{}],"assets/images/*.svg":[function(require,module,exports) {
 module.exports = {
   "cat": require("./cat.svg"),
@@ -62259,21 +62259,21 @@ module.exports = {
   "lion": require("./lion.svg"),
   "owl": require("./owl.svg"),
   "penguin": require("./penguin.svg"),
-  "raccoon": require("./raccoon.svg"),
   "pig": require("./pig.svg"),
-  "sheep": require("./sheep.svg"),
-  "react": require("./react.svg")
+  "raccoon": require("./raccoon.svg"),
+  "react": require("./react.svg"),
+  "sheep": require("./sheep.svg")
 };
-},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./koala.svg":"assets/images/koala.svg","./lion.svg":"assets/images/lion.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./raccoon.svg":"assets/images/raccoon.svg","./pig.svg":"assets/images/pig.svg","./sheep.svg":"assets/images/sheep.svg","./react.svg":"assets/images/react.svg"}],"assets/videos/shoe.mp4":[function(require,module,exports) {
-module.exports = "/shoe.82a144ff.mp4";
-},{}],"assets/videos/boy.mp4":[function(require,module,exports) {
+},{"./cat.svg":"assets/images/cat.svg","./dog.svg":"assets/images/dog.svg","./fox.svg":"assets/images/fox.svg","./koala.svg":"assets/images/koala.svg","./lion.svg":"assets/images/lion.svg","./owl.svg":"assets/images/owl.svg","./penguin.svg":"assets/images/penguin.svg","./pig.svg":"assets/images/pig.svg","./raccoon.svg":"assets/images/raccoon.svg","./react.svg":"assets/images/react.svg","./sheep.svg":"assets/images/sheep.svg"}],"assets/videos/boy.mp4":[function(require,module,exports) {
 module.exports = "/boy.41fd31bf.mp4";
+},{}],"assets/videos/shoe.mp4":[function(require,module,exports) {
+module.exports = "/shoe.82a144ff.mp4";
 },{}],"assets/videos/*.mp4":[function(require,module,exports) {
 module.exports = {
-  "shoe": require("./shoe.mp4"),
-  "boy": require("./boy.mp4")
+  "boy": require("./boy.mp4"),
+  "shoe": require("./shoe.mp4")
 };
-},{"./shoe.mp4":"assets/videos/shoe.mp4","./boy.mp4":"assets/videos/boy.mp4"}],"Components/PlayerControls.js":[function(require,module,exports) {
+},{"./boy.mp4":"assets/videos/boy.mp4","./shoe.mp4":"assets/videos/shoe.mp4"}],"Components/PlayerControls.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -62488,7 +62488,7 @@ function Preview({
     className: `human-preview col_${video ? "2" : "1"}`,
     style: style
   }, _react.default.createElement("div", {
-    className: `card col_${video ? "1" : "2"}`
+    className: `card `
   }, _react.default.createElement("div", {
     className: "card__header"
   }, _react.default.createElement("img", {
@@ -63029,6 +63029,7 @@ function Previews({
     return filtered.slice(0, showedItems);
   }, [showedItems, filtered]);
   const handleVideoScroll = (0, _throttle.default)(e => {
+    if (!previewsRef.current) return;
     const videos = previewsRef.current.querySelectorAll("video");
     videos.forEach(video => handlePlayVideo(video));
   }, 100);
@@ -63046,12 +63047,16 @@ function Previews({
   }
 
   (0, _react.useEffect)(() => {
+    if (!previewsRef.current) return;
+
     if (!videoStoped) {
-      window.addEventListener("scroll", handleVideoScroll);
+      window.addEventListener("scroll", handleVideoScroll, false);
+    } else {
+      window.removeEventListener("scroll", handleVideoScroll, false);
     }
 
-    () => window.removeEventListener("scroll", handleVideoScroll);
-  });
+    return () => window.removeEventListener("scroll", handleVideoScroll, false);
+  }, [videoStoped]);
 
   function togglePlay(video) {
     const method = video.paused ? "play" : "pause";
@@ -63060,7 +63065,6 @@ function Previews({
 
   const handleClick = e => {
     setVideoStoped(true);
-    window.removeEventListener("scroll", handleVideoScroll);
   };
 
   return _react.default.createElement("section", {
@@ -63474,7 +63478,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./assets\\back3.svg":[["back3.f832b407.svg","assets/back3.svg"],"assets/back3.svg"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWJ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWJ0bbck.ff70b54e.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWJ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFUZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFUZ0bbck.dceceadb.woff2","assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFUZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWZ0bbck.woff2":[["mem8YaGs126MiZpBA-UFWZ0bbck.0404a59b.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWZ0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVp0bbck.woff2":[["mem8YaGs126MiZpBA-UFVp0bbck.843634e6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFWp0bbck.woff2":[["mem8YaGs126MiZpBA-UFWp0bbck.dde40bda.woff2","assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFWp0bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFW50bbck.woff2":[["mem8YaGs126MiZpBA-UFW50bbck.5e3b91a6.woff2","assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFW50bbck.woff2"],"./assets\\fonts\\mem8YaGs126MiZpBA-UFVZ0b.woff2":[["mem8YaGs126MiZpBA-UFVZ0b.d5072cd0.woff2","assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"assets/fonts/mem8YaGs126MiZpBA-UFVZ0b.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.fe2f562e.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6HABTdfw.woff2"],"./assets\\fonts\\l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2":[["l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.e8f4b576.woff2","assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"assets/fonts/l7gAbjR61M69yt8Z8w6FZf9WoBxdBrGFuV6JABQ.woff2"],"./assets\\fullScreen.svg":[["fullScreen.2403092b.svg","assets/fullScreen.svg"],"assets/fullScreen.svg"],"./assets\\previewScreen.svg":[["previewScreen.5849b4d0.svg","assets/previewScreen.svg"],"assets/previewScreen.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./assets\\back3.svg":[["back3.f832b407.svg","assets/back3.svg"],"assets/back3.svg"],"./assets\\fullScreen.svg":[["fullScreen.2403092b.svg","assets/fullScreen.svg"],"assets/fullScreen.svg"],"./assets\\previewScreen.svg":[["previewScreen.5849b4d0.svg","assets/previewScreen.svg"],"assets/previewScreen.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -63538,7 +63542,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50059" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52256" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
