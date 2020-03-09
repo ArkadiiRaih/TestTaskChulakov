@@ -25,6 +25,7 @@ function Previews({ people = [], filter }) {
   }, [showedItems, filtered]);
 
   const handleVideoScroll = throttle(e => {
+    if (!previewsRef.current) return;
     const videos = previewsRef.current.querySelectorAll("video");
     videos.forEach(video => handlePlayVideo(video));
   }, 100);
@@ -44,11 +45,14 @@ function Previews({ people = [], filter }) {
   }
 
   useEffect(() => {
+    if (!previewsRef.current) return;
     if (!videoStoped) {
-      window.addEventListener("scroll", handleVideoScroll);
+      window.addEventListener("scroll", handleVideoScroll, false);
+    } else {
+      window.removeEventListener("scroll", handleVideoScroll, false);
     }
-    () => window.removeEventListener("scroll", handleVideoScroll);
-  });
+    return () => window.removeEventListener("scroll", handleVideoScroll, false);
+  }, [videoStoped]);
 
   function togglePlay(video) {
     const method = video.paused ? "play" : "pause";
@@ -57,7 +61,6 @@ function Previews({ people = [], filter }) {
 
   const handleClick = e => {
     setVideoStoped(true);
-    window.removeEventListener("scroll", handleVideoScroll);
   };
 
   return (
