@@ -11,10 +11,9 @@ import Player from "./Player";
 
 function Preview({ human = {}, style, handleClick }) {
   const { id, name, image, age, favourite, phrase, video, phone } = human;
-
   return (
     <article className={`human-preview col_${video ? "2" : "1"}`} style={style}>
-      <div className={`card col_${video ? "1" : "2"}`}>
+      <div className={`card `}>
         <div className="card__header">
           <img className="avatar" src={images[image]} />
           <p className="name">{name}</p>
