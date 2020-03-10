@@ -14,14 +14,14 @@ function Table({ people = [], filter }) {
   const sliced = filtered.slice(0, showedItems);
 
   return (
-    <section ref={tableRef} className="table__wrapper">
-      <Fade bottom cascade>
-        <section className="table">
-          {sliced.map(human => {
-            return <Field key={human.id} human={human} />;
-          })}
-        </section>
-      </Fade>
+    <section ref={tableRef} className="table">
+      {sliced.map(human => {
+        return (
+          <Fade bottom>
+            <Field key={human.id} human={human} />
+          </Fade>
+        );
+      })}
     </section>
   );
 }

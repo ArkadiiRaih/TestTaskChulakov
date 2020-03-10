@@ -64,14 +64,12 @@ function Previews({ people = [], filter }) {
   };
 
   return (
-    <section ref={previewsRef} className="previews__wrapper">
-      <Fade bottom cascade>
-        <section className="Previews">
-          {sliced.map(human => (
-            <Preview key={human.id} human={human} handleClick={handleClick} />
-          ))}
-        </section>
-      </Fade>
+    <section ref={previewsRef} className="Previews">
+      {sliced.map(human => (
+        // <Fade bottom>
+        <Preview key={human.id} human={human} handleClick={handleClick} />
+        // </Fade>
+      ))}
     </section>
   );
 }

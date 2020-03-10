@@ -1,6 +1,35 @@
-$bg: rgba(0, 0, 0, 1);
-$fg: lighten($bg, 20%);
-$borderWidth: 1px;
+$bg: midnightblue;
+$text: #222;
+$text-white: #fefefe;
+$text-secondary: #666;
+$brand-yellow: #ffc600;
+$border-color: rgba(0, 0, 0, 0.2);
+$bg-light: rgba(255, 255, 255, 0.2);
+$bg-dark: rgba(0, 0, 0, 0.5);
+$bg-light-hover: rgba(255, 255, 255, 0.8);
+$shadow: rgba(0, 0, 0, 0.3);
+
+$border-radius: 2px;
+
+$star-size: 30px;
+
+$border-width: 1px;
+
+// Declare font size in root, in order to use relative font sizes(rem)
+:root {
+  font-size: 16px;
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
+}
+
+@mixin border {
+  border: $border-width solid $border-color;
+}
+
+@mixin shadow {
+  box-shadow: -2px 2px 3px 1px $shadow;
+}
 
 @keyframes show {
   from {
@@ -15,16 +44,13 @@ $borderWidth: 1px;
 :before,
 :after {
   box-sizing: border-box;
-  font-family: "Open Sans";
-  font-size: 16px;
-
-  @media screen and (max-width: 500px) {
-    font-size: 12px;
-  }
+  font-size: 1rem;
 }
 
 body {
   margin: 0;
+  color: $text;
+  font-family: "Open Sans", sans-serif;
 }
 
 input {
@@ -39,8 +65,7 @@ input[type="radio"] {
 }
 
 label {
-  // color: rgba(0, 0, 0, 0.4);
-  color: #fefefe;
+  color: $text-white;
   display: inline-block;
   text-align: center;
   cursor: pointer;
@@ -49,12 +74,7 @@ label {
   transition: all 0.7s;
   height: 30px;
   line-height: 30px;
-  // background: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-form {
-  padding: 1px;
+  background: $bg-light;
 }
 
 section {
@@ -63,25 +83,21 @@ section {
 }
 
 input[type="radio"]:checked + label {
-  // color: #fefefe;
-  // background: rgba(255, 255, 255, 0.2);
-  color: rgba(0, 0, 0, 0.4);
-  background: rgba(255, 255, 255, 0.8);
+  color: $text-secondary;
+  background: $bg-light-hover;
 }
 
 label + input[type="radio"] + label {
-  // border-left: solid $borderWidth $fg;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: $border-width solid $border-color;
 }
 .radio-group {
-  // border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+  @include shadow();
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 10px;
   overflow: hidden;
   width: 100%;
-  border-radius: 2px;
+  border-radius: $border-radius;
 }
 
 .application {
@@ -114,8 +130,11 @@ label + input[type="radio"] + label {
     grid-template-columns: 1fr;
   }
   h3 {
-    color: #fefefe;
-    font-family: "Spartan";
+    color: $text-white;
+    font-weight: normal;
+    span {
+      color: $text-white;
+    }
   }
 }
 
@@ -128,7 +147,7 @@ label + input[type="radio"] + label {
 }
 
 .avatar {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  @include border();
   border-radius: 50%;
   width: 70px;
   height: 70px;
@@ -141,27 +160,23 @@ label + input[type="radio"] + label {
   padding: 10px;
   gap: 10px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
-  background: rgba(255, 255, 255, 0.9);
+  background: $bg-light-hover;
+  @include border();
+  @include shadow();
+
   &:first-of-type {
-    // border-radius: 2px;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
   &:last-of-type {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
   }
 
   @media screen and (max-width: 680px) {
     gap: 0;
   }
 }
-
-// .field:not(:last-of-type) {
-//   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-// }
 
 .field p {
   align-self: center;
@@ -179,7 +194,7 @@ label + input[type="radio"] + label {
 .field .name {
   grid-column: 2 / span 3;
   margin: 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   @media screen and (max-width: 680px) {
     grid-column: span 5 / 8;
   }
@@ -189,11 +204,9 @@ label + input[type="radio"] + label {
 }
 
 .name {
-  font-family: "Spartan";
-  font-size: 18px;
-  @media screen and (max-width: 420px) {
-    font-size: 14px;
-  }
+  font-family: "Bitter", serif;
+  font-size: 1.125rem;
+  color: $text-secondary;
 }
 
 .field .age {
@@ -225,31 +238,24 @@ label + input[type="radio"] + label {
   }
 }
 
-$star--filled: ★;
-$star--empty: ☆;
-$filled-color: #f9bf3b;
-$empty-color: #444;
-$size: 30px;
-
-input[type="checkbox"] {
-  display: none;
-  position: absolute;
-  visibility: hidden;
-  &:checked {
-    + label:after,
-    ~ label:after {
-      content: "#{$star--filled}";
-      color: $filled-color;
-      text-shadow: 0 0 20px $filled-color;
-    }
-  }
-}
-
-@mixin star-rating($filled-color: #f9bf3b, $empty-color: #444, $size: 30px) {
+@mixin star-rating($filled-color, $empty-color, $size) {
   $star--filled: ★;
   $star--empty: ☆;
   > * {
     float: right;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+    position: absolute;
+    visibility: hidden;
+    &:checked {
+      + label:after,
+      ~ label:after {
+        content: "#{$star--filled}";
+        color: $filled-color;
+      }
+    }
   }
 
   label {
@@ -277,7 +283,6 @@ input[type="checkbox"] {
     }
     &:hover:after {
       color: lighten($empty-color, 10%);
-      text-shadow: 0 0 15px lighten($empty-color, 10%);
     }
   }
   input {
@@ -287,7 +292,6 @@ input[type="checkbox"] {
       ~ label:after {
         content: "#{$star--filled}";
         color: $filled-color;
-        text-shadow: 0 0 20px $filled-color;
       }
     }
   }
@@ -295,7 +299,7 @@ input[type="checkbox"] {
 
 .rating {
   align-self: center;
-  @include star-rating();
+  @include star-rating($brand-yellow, $text-secondary, $star-size);
 }
 
 .card {
@@ -309,8 +313,7 @@ input[type="checkbox"] {
 }
 
 .card__side {
-  // margin-right: -1px;
-  box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  @include shadow();
   overflow: hidden;
   width: 100%;
 }
@@ -318,10 +321,10 @@ input[type="checkbox"] {
 .human-preview {
   display: flex;
   min-height: 250px;
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: $border-radius;
+  background: $bg-light-hover;
   overflow: hidden;
+  @include shadow();
 
   @media only screen and (max-width: 680px) {
     flex-direction: column;
@@ -386,10 +389,6 @@ input[type="checkbox"] {
 
 .table {
   margin-top: 30px;
-  // border: 1px solid rgba(0, 0, 0, 0.2);
-  // box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
-  // background: rgba(255, 255, 255, 0.9);
-  // border-radius: 2px;
 }
 
 .lds-dual-ring {
@@ -406,7 +405,7 @@ input[type="checkbox"] {
   margin: 8px;
   border-radius: 50%;
   border: 6px solid rgba(0, 0, 0, 0.7);
-  border-color: #000 transparent #000 transparent;
+  border-color: rgba(0, 0, 0, 0.7) transparent rgba(0, 0, 0, 0.7) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
@@ -428,50 +427,50 @@ input[type="checkbox"] {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
-  // justify-content: center;
   padding: 0;
   height: 30px;
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
+  border-radius: $border-radius;
+  @include shadow();
 }
 
 .search-form input,
 .search-form button {
-  color: #666666;
+  color: $text-white;
   flex: 1 0 auto;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
+  background: $bg-light;
 }
 
 .search-form button {
   flex: 1 0 auto;
-  // background: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.7);
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid $border-color;
   height: 30px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-  // color: #fefefe;
-  color: rgba(0, 0, 0, 0.4);
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  // color: $text;
   &:hover,
   &:focus {
-    // background: rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.9);
-    font-weight: bold;
+    color: $text;
+    background: $bg-light-hover;
   }
 }
 .search-form input {
   flex: 4 0 auto;
   padding: 0 10px;
   outline: none;
-  color: #999;
   outline: none;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-  background: rgba(255, 255, 255, 0.7);
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
   &:focus {
-    color: #666;
-    background: rgba(255, 255, 255, 0.9);
+    color: $text;
+    background: $bg-light-hover;
+    &::placeholder {
+      color: $text;
+    }
+  }
+  &::placeholder {
+    color: $text-white;
   }
 }
 
@@ -491,35 +490,35 @@ input[type="checkbox"] {
   margin: 1px 0 0 0;
   padding: 0;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   list-style: none;
   z-index: 1;
   flex-basis: 100%;
-  background: #fefefe;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+  background: $text-white;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
   transition: all 0.4s ease-in;
   animation: suggestions-show 0.4s linear forwards;
+  @include border();
+  @include shadow();
 
   &_hidden {
     display: none;
   }
 
   li {
-    color: #666666;
-    font-size: 16px;
+    color: $text;
+    font-size: 1rem;
     padding: 5px 10px;
     cursor: pointer;
   }
   li:hover {
-    background: rgba(0, 0, 0, 0.1) lightskyblue;
+    // background: $;
   }
   li:not(:last-of-type) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $border-color;
   }
   .hl {
-    background: #ffc600;
+    background: $brand-yellow;
   }
 }
 
@@ -530,17 +529,9 @@ input[type="checkbox"] {
   left: 0;
   bottom: -200px;
   z-index: -1;
-  background-color: midnightblue;
+  background-color: $bg;
   background-image: url("./assets/back3.svg");
   background-size: cover;
-}
-
-.blur {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: blur(200px);
-  background: lightcyan;
 }
 
 .player {
@@ -549,7 +540,6 @@ input[type="checkbox"] {
   overflow: hidden;
 }
 
-/* This css is only applied when fullscreen is active. */
 .player:fullscreen {
   max-width: none;
   width: 100%;
@@ -568,7 +558,7 @@ input[type="checkbox"] {
   background: none;
   border: 0;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.8);
+  color: $bg-light-hover;
   text-align: center;
   outline: 0;
   padding: 0;
@@ -612,18 +602,16 @@ input[type="checkbox"] {
   flex-basis: 100%;
   height: 10px;
   transition: height 0.3s;
-  background: rgba(0, 0, 0, 0.5);
+  background: $bg-dark;
   cursor: ew-resize;
 }
 
 .progress__filled {
   width: 50%;
-  background: rgba(255, 255, 255, 0.8);
+  background: $bg-light-hover;
   flex: 0;
   flex-basis: 50%;
 }
-
-/* unholy css to style input type="range" */
 
 input[type="range"] {
   -webkit-appearance: none;
@@ -640,39 +628,39 @@ input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.6);
+  background: $bg-light-hover;
   border-radius: 1.3px;
-  border: 0.2px solid rgba(1, 1, 1, 0);
+  border: 0.2px solid $text;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   height: 15px;
   width: 15px;
   border-radius: 50px;
-  background: #ffc600;
+  background: $brand-yellow;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -3.5px;
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #fff;
+  background: $bg-light-hover;
 }
 
 input[type="range"]::-moz-range-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.8);
+  background: $bg-light-hover;
   border-radius: 1.3px;
-  border: 0.2px solid rgba(1, 1, 1, 0);
+  border: 0.2px solid $text;
 }
 
 input[type="range"]::-moz-range-thumb {
   height: 15px;
   width: 15px;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.8);
+  background: $bg-light-hover;
   cursor: pointer;
 }
 
@@ -694,4 +682,8 @@ input[type="range"]::-moz-range-thumb {
   &:hover {
     opacity: 1;
   }
+}
+
+.test {
+  transform: rotate(90deg);
 }

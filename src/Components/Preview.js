@@ -29,10 +29,7 @@ function Preview({ human = {}, style, handleClick }) {
       </div>
       {video ? (
         <Player video={videos[video]} handleClick={handleClick} />
-      ) : // <div className="card__side player">
-      //   <video src={videos[video]} muted controls></video>
-      // </div>
-      null}
+      ) : null}
     </article>
   );
 }

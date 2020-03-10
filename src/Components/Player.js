@@ -50,7 +50,6 @@ function Player({ video, handleClick }) {
     } else if (video.msRequestFullscreen) {
       video.msRequestFullscreen();
     }
-    // setFull(full => !full);
   };
 
   return (
