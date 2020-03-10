@@ -164,15 +164,6 @@ label + input[type="radio"] + label {
   @include border();
   @include shadow();
 
-  &:first-of-type {
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
-  }
-  &:last-of-type {
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
-  }
-
   @media screen and (max-width: 680px) {
     gap: 0;
   }
@@ -324,6 +315,7 @@ label + input[type="radio"] + label {
   border-radius: $border-radius;
   background: $bg-light-hover;
   overflow: hidden;
+  height: 100%;
   @include shadow();
 
   @media only screen and (max-width: 680px) {
@@ -343,7 +335,7 @@ label + input[type="radio"] + label {
   object-fit: cover;
 }
 
-.Previews {
+.previews {
   margin-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -376,6 +368,10 @@ label + input[type="radio"] + label {
   }
 }
 
+.col_1 .react-reveal,
+.col_2 .react-reveal {
+  height: 100%;
+}
 .col_1 {
   grid-column: auto / span 1;
   @media only screen and (max-width: 500px) {
@@ -389,6 +385,18 @@ label + input[type="radio"] + label {
 
 .table {
   margin-top: 30px;
+
+  .react-reveal {
+    overflow: hidden;
+  }
+  .react-reveal:first-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+  .react-reveal:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
 }
 
 .lds-dual-ring {

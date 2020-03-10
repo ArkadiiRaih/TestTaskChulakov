@@ -17,8 +17,8 @@ function Table({ people = [], filter }) {
     <section ref={tableRef} className="table">
       {sliced.map(human => {
         return (
-          <Fade bottom>
-            <Field key={human.id} human={human} />
+          <Fade bottom key={human.id}>
+            <Field human={human} />
           </Fade>
         );
       })}
